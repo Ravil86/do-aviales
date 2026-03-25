@@ -8,3 +8,6 @@
 !theme/*
 !theme*
 !/theme/*
+
+!lib*
+!lib/*
