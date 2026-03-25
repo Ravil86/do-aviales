@@ -55,7 +55,8 @@ define('LOGOANDSITENAME', 2);
  * @param moodle_page $page
  * @return void
  */
-function theme_academi_page_init(moodle_page $page) {
+function theme_academi_page_init(moodle_page $page)
+{
     global $CFG;
     $page->requires->js_call_amd('theme_academi/theme', 'init');
 }
@@ -68,14 +69,25 @@ function theme_academi_page_init(moodle_page $page) {
  * @param object $theme
  * @return string
  */
-function theme_academi_process_css($css, $theme) {
+function theme_academi_process_css($css, $theme)
+{
     global $OUTPUT, $CFG;
     $css = theme_academi_pre_css_set_fontwww($css);
+    // Get custom CSS.
+    $css = theme_academi_get_customcss($css);
     // Set custom CSS.
     $customcss = $theme->settings->customcss;
-    $css = theme_academi_set_customcss($css , $customcss);
+    $css = theme_academi_set_customcss($css, $customcss);
     return $css;
 }
+
+function theme_academi_get_customcss($css)
+{
+    global $CFG;
+    $css .=  file_get_contents($CFG->dirroot . '/theme/academi/style/moodle.css');
+    return $css;
+}
+
 
 /**
  * Adds any custom CSS to the CSS before it is cached.
@@ -85,7 +97,8 @@ function theme_academi_process_css($css, $theme) {
  * @return string The CSS which now contains our custom CSS.
  * @return string $css
  */
-function theme_academi_set_customcss($css, $customcss) {
+function theme_academi_set_customcss($css, $customcss)
+{
     $tag = '[[setting:customcss]]';
     $replacement = $customcss;
     if (is_null($replacement)) {
@@ -107,7 +120,8 @@ function theme_academi_set_customcss($css, $customcss) {
  * @param array $options
  * @return bool
  */
-function theme_academi_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
+function theme_academi_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = [])
+{
     static $theme;
     $bgimgs = ['footerbgimg', 'loginbg', 'mspotmedia'];
 
@@ -140,15 +154,16 @@ function theme_academi_pluginfile($course, $cm, $context, $filearea, $args, $for
  * @param string $css
  * @return string
  */
-function theme_academi_pre_css_set_fontwww($css) {
+function theme_academi_pre_css_set_fontwww($css)
+{
     global $CFG;
     if (empty($CFG->themewww)) {
-        $themewww = $CFG->wwwroot."/theme";
+        $themewww = $CFG->wwwroot . "/theme";
     } else {
         $themewww = $CFG->themewww;
     }
     $tag = '[[setting:fontwww]]';
-    $css = str_replace($tag, $themewww.'/academi/fonts/', $css);
+    $css = str_replace($tag, $themewww . '/academi/fonts/', $css);
     return $css;
 }
 
@@ -156,14 +171,15 @@ function theme_academi_pre_css_set_fontwww($css) {
  * Load the font folder path into the scss.
  * @return string
  */
-function theme_academi_set_fontwww() {
+function theme_academi_set_fontwww()
+{
     global $CFG;
     if (empty($CFG->themewww)) {
-        $themewww = $CFG->wwwroot."/theme";
+        $themewww = $CFG->wwwroot . "/theme";
     } else {
         $themewww = $CFG->themewww;
     }
-    $fontwww = '$fontwww: "'.$themewww.'/academi/fonts/"'.";\n";
+    $fontwww = '$fontwww: "' . $themewww . '/academi/fonts/"' . ";\n";
     return $fontwww;
 }
 
@@ -174,7 +190,8 @@ function theme_academi_set_fontwww() {
  * @param string $type logo position type.
  * @return type|string
  */
-function theme_academi_get_logo_url($type = 'header') {
+function theme_academi_get_logo_url($type = 'header')
+{
     global $OUTPUT;
     static $theme;
     if (empty($theme)) {
@@ -197,7 +214,8 @@ function theme_academi_get_logo_url($type = 'header') {
  * @param bool $format
  * @return string
  */
-function theme_academi_get_setting($setting, $format = true) {
+function theme_academi_get_setting($setting, $format = true)
+{
     global $CFG, $PAGE;
     require_once($CFG->dirroot . '/lib/weblib.php');
     static $theme;
@@ -225,7 +243,8 @@ function theme_academi_get_setting($setting, $format = true) {
  * @param string $key
  * @return string
  */
-function theme_academi_lang($key='') {
+function theme_academi_lang($key = '')
+{
     $pos = strpos($key, 'lang:');
     if ($pos !== false) {
         list($l, $k) = explode(":", $key);
@@ -246,7 +265,8 @@ function theme_academi_lang($key='') {
  * @param theme_config $theme The theme config object.
  * @return string
  */
-function theme_academi_get_main_scss_content($theme) {
+function theme_academi_get_main_scss_content($theme)
+{
     global $CFG;
 
     $scss = '';
@@ -272,12 +292,24 @@ function theme_academi_get_main_scss_content($theme) {
 }
 
 /**
+ * Get compiled css.
+ *
+ * @return string compiled css
+ */
+function theme_academi_get_precompiled_css()
+{
+    global $CFG;
+    return file_get_contents($CFG->dirroot . '/theme/academi/style/moodle.css');
+}
+
+/**
  * Get the configuration values into main scss variables.
  *
  * @param string $theme theme data.
  * @return string $scss return the scss values.
  */
-function theme_academi_get_pre_scss($theme) {
+function theme_academi_get_pre_scss($theme)
+{
     $scss = '';
     $helperobj = new theme_academi\helper();
     $scss .= $helperobj->load_bgimages($theme, $scss);
@@ -291,7 +323,8 @@ function theme_academi_get_pre_scss($theme) {
  * @param theme_config $theme The theme config object.
  * @return string
  */
-function theme_academi_get_extra_scss($theme) {
+function theme_academi_get_extra_scss($theme)
+{
     // Load the settings from the parent.
     $theme = theme_config::load('boost');
     // Call the parent themes get_extra_scss function.

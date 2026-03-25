@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+body:not(.pagelayout-maintenance) #page-wrapper {margin-top: 45px;}
+.navbar.fixed-top{height:45px}
+.drawer-toggles .drawer-toggler{top: calc(45px + 0.7rem);}
+/* #page.drawers .main-inner{max-width:unset;} */
+.header-main .navbar.navbar-light .navbar-brand.has-logo{max-width: unset;margin:0}
+.header-main .navbar.navbar-light .navbar-brand.has-logo .logo img {max-height: 50px!important;}
+.userbutton .avatar.current .userinitials.size-35{width: 30px;height:30px}
+
+#page.drawers .main-inner {padding-top: 0!important;}
+#page.drawers .activity-header{margin-bottom: 0!important;}
+#region-main iframe#resourceobject{min-height: 750px;}
+
+@media (min-width: 992px) {
+    .drawer-left, .drawer-right {
+        top: 45px;
+    }
+}

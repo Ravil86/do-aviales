@@ -55,10 +55,11 @@ $THEME->activityheaderconfig = [
     'notitle' => true,
 ];
 
-$THEME->scss = function($theme) {
+$THEME->scss = function ($theme) {
     return  theme_academi_get_main_scss_content($theme);
 };
 $THEME->prescsscallback = 'theme_academi_get_pre_scss';
+$THEME->precompiledcsscallback = 'theme_academi_get_precompiled_css';
 
 $THEME->extrascsscallback = 'theme_academi_get_extra_scss';
 
@@ -199,4 +200,3 @@ $THEME->layouts = [
         'defaultregion' => 'side-pre',
     ],
 ];
-
