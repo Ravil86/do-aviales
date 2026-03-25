@@ -1,0 +1,8 @@
+# Игнорировать всё, кроме .gitignore
+*
+!.gitignore
+!README.md
+
+# # Разрешить нужные папки и файлы
+!public*
+!public/*
