@@ -4,6 +4,7 @@ body:not(.pagelayout-maintenance) #page-wrapper {margin-top: 45px;}
 .navbar.fixed-top{height:45px}
 .drawer-toggles .drawer-toggler{top: calc(45px + 0.7rem);}
 /* #page.drawers .main-inner{max-width:unset;} */
+.pagelayout-standard #page.drawers .main-inner, .pagelayout-course #page.drawers .main-inner,body.limitedwidth #page.drawers .main-inner{max-width: none !important;}
 .header-main .navbar.navbar-light .navbar-brand.has-logo{max-width: unset;margin:0}
 .header-main .navbar.navbar-light .navbar-brand.has-logo .logo img {max-height: 50px!important;}
 .userbutton .avatar.current .userinitials.size-35{width: 30px;height:30px}
@@ -16,4 +17,12 @@ body:not(.pagelayout-maintenance) #page-wrapper {margin-top: 45px;}
     .drawer-left, .drawer-right {
         top: 45px;
     }
+}
+#page.drawers{margin-top: 8px;}
+.breadcrumb .breadcrumb-item span{
+    max-width:650px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
 }
