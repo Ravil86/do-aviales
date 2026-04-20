@@ -90,7 +90,7 @@
             {{/ theme_boost/drawer}}
         {{/hasblocks}}
         <div id="page" data-region="mainpage" data-usertour="scroller" class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
-            <div id="topofscroll" class="main-inner container">
+            <div id="topofscroll" class="main-inner container!">
                 <div class="drawer-toggles d-flex">
                     {{#courseindex}}
                         <div class="drawer-toggler drawer-left-toggle open-nav d-print-none">
@@ -128,38 +128,64 @@
                 </div>
                 {{{ output.full_header }}}
                 {{#secondarymoremenu}}
+                <!-- контейнер просмотра материала курса-->
+                <div class="container">
                     <div class="secondary-navigation d-print-none">
                         {{> core/moremenu}}
                     </div>
+                </div>
                 {{/secondarymoremenu}}
-                <div id="page-content" class="pb-3 d-print-block">
-                    <div id="region-main-box">
-                        {{#hasregionmainsettingsmenu}}
-                        <div id="region-main-settings-menu" class="d-print-none">
-                            <div> {{{ regionmainsettingsmenu }}} </div>
-                        </div>
-                        {{/hasregionmainsettingsmenu}}
-                        <section id="region-main" aria-label="{{#str}}content{{/str}}">
-
-                            {{#hasregionmainsettingsmenu}}
-                                <div class="region_main_settings_menu_proxy"></div>
-                            {{/hasregionmainsettingsmenu}}
-                            {{{ output.course_content_header }}}
-                            {{#headercontent}}
-                                {{> core/activity_header }}
-                            {{/headercontent}}
-                            {{#overflow}}
-                                <div class="container-fluid tertiary-navigation">
-                                    <div class="navitem">
-                                        {{> core/url_select}}
-                                    </div>
+                <div class="container">
+                
+                    <!-- Заголовок Start -->
+                    <div class="d-flex align-items-center">
+                            <div class="me-auto d-flex flex-column">
+                                {{#contextheader}}
+                                <div>
+                                    {{{contextheader}}}
                                 </div>
-                            {{/overflow}}
-                            {{{ output.main_content }}}
-                            {{{ output.activity_navigation }}}
-                            {{{ output.course_content_footer }}}
+                                {{/contextheader}}
+                                <div>
+                                    {{> core/welcome }}
+                                </div>
+                            </div>
+                            <div class="header-actions-container ms-auto" data-region="header-actions-container">
+                                {{#headeractions}}
+                                <div class="header-action ms-2">{{{.}}}</div>
+                                {{/headeractions}}
+                            </div>
+                        </div>
+                    <!-- Заголовок End -->
 
-                        </section>
+                    <div id="page-content" class="pb-3 d-print-block">
+                        <div id="region-main-box">
+                            {{#hasregionmainsettingsmenu}}
+                            <div id="region-main-settings-menu" class="d-print-none">
+                                <div> {{{ regionmainsettingsmenu }}} </div>
+                            </div>
+                            {{/hasregionmainsettingsmenu}}
+                            <section id="region-main" aria-label="{{#str}}content{{/str}}">
+
+                                {{#hasregionmainsettingsmenu}}
+                                    <div class="region_main_settings_menu_proxy"></div>
+                                {{/hasregionmainsettingsmenu}}
+                                {{{ output.course_content_header }}}
+                                {{#headercontent}}
+                                    {{> core/activity_header }}
+                                {{/headercontent}}
+                                {{#overflow}}
+                                    <div class="container-fluid tertiary-navigation">
+                                        <div class="navitem">
+                                            {{> core/url_select}}
+                                        </div>
+                                    </div>
+                                {{/overflow}}
+                                {{{ output.main_content }}}
+                                {{{ output.activity_navigation }}}
+                                {{{ output.course_content_footer }}}
+
+                            </section>
+                        </div>
                     </div>
                 </div>
             </div>
